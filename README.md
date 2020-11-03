@@ -3,7 +3,7 @@
 2번 항목
 - 자료구조 성적.PNG
 - Lab06: Run()함수가 잘못 구현된 프로젝트
-  <ul>FolderType.cpp에 Run()함수가 있습니다</ul>
+  <ul>FolderType.cpp에 RunFolder()함수가 있습니다</ul>
 - Lab07: Run()함수를 고친 프로젝트
   <ul>Application.cpp에 Run()함수가 있습니다</ul>
   <ul>Application.cpp에 m_chase가 포인터를 담는 스택형 멤버변수입니다</ul>
