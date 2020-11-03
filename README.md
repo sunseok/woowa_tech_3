@@ -3,14 +3,20 @@
 2번 항목
 - 자료구조 성적.PNG
 - Lab06: Run()함수가 잘못 구현된 프로젝트
+  -FolderType.cpp에 Run()함수가 있습니다
 - Lab07: Run()함수를 고친 프로젝트
-
+  -Application.cpp에 Run()함수가 있습니다
+  -Application.cpp에 m_chase가 포인터를 담는 스택형 멤버변수입니다.
 3번 항목
 - ylml: 사물함 신청 서비스 '네자리내자리'
+- ylml-관련자료
+  -네자리내자리 SW festival 출품.PNG
+  -네자리내자리-사용설명서(관리자용)
+  -네자리내자리-사용설명서(사용자용)
+  -네자리내자리-홍보자료
 - ReadingBook: 독서습관 형성 프로그램
 - LearnVocaProgram: 영어단어 암기 프로그램
 - 일본어 한자 암기앱 기획 보고서.pages
-- 네자리내자리 SW festival 출품.JPG
 
 4번 항목
 - 운동 후.JPG
