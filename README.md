@@ -13,5 +13,5 @@
 - 네자리내자리 SW festival 출품.JPG
 
 4번 항목
-- 군입대 후.JPG
+- 운동 후.JPG
 - 입대 전.JPG
