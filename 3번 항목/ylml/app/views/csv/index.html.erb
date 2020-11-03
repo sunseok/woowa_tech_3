@@ -1,0 +1,103 @@
+  <div class="container container-fluid">
+      <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                회원정보파일 업로드 <small>User info file Upload</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                  '네자리내자리'는 엑셀의 CSV 파일을 이용하여 회원정보를 업로드 할 수 있습니다.<br>
+                  <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-full="assets/tutorial.jpg"> 사용방법 </button>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <h2>파일선택</h2>
+    <hr>
+    <%= form_tag import_csv_index_path, multipart: true do %>
+      <span class="btn btn-large btn-default btn-file">
+        파일선택
+        <%= file_field_tag :file %>
+      </span>
+       <%= submit_tag "등록", :class => "btn btn-default", data: {confirm: "해당 파일로 등록하시겠습니까?"} %>
+    <% end %>
+    <br>
+    <br>
+    <%= form_tag csv_index_path do %>
+    <h2>직접등록</h2>
+    <hr>
+      <div class="table-responsive" style="min-height:300px;">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th><strong>이름</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+              <th><strong>학과</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+              <th><strong>학번</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+              <th><strong>학생회비</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+              <th><strong>비밀번호</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+              <th><strong>비밀번호 확인</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+              <th><strong>권한부여</strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+            </tr>
+          </thead>
+          <tbody>
+            <td><input type = "text" class="form-control" name = "name" placeholder="이름"></td>
+            <td>
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    학과선택
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <% if ["응용물리학과", "응용수학과", "우주과학과"].include? current_user.major %>
+                      <li><input type = "radio" name = "major" value="응용물리학과">응용물리학과</li>
+                      <li><input type = "radio" name = "major" value="응용수학과">응용수학과</li>
+                      <li><input type = "radio" name = "major" value="우주과학과">우주과학과</li>
+                    <% elsif ["전자공학과", "컴퓨터공학과", "생체의공학과", "소프트웨어융합학과"].include? current_user.major %>
+                      <li><input type = "radio" name = "major" value="전자공학과">전자공학과</li>
+                      <li><input type = "radio" name = "major" value="컴퓨터공학과">컴퓨터공학과</li>
+                      <li><input type = "radio" name = "major" value="생체의공학과">생체의공학과</li>
+                      <li><input type = "radio" name = "major" value="소프트웨어융합학과">소프트웨어융합학과</li>
+                    <% elsif current_user.major == "응용화학과" %>
+                      <li><input type = "radio" name = "major" value="응용화학과">응용화학과</li>
+                    <% else %>
+                      <li><input type = "radio" name = "major" value="산업경영공학과">산업경영공학과</li>
+                    <% end %>
+                  </ul>
+                </div>
+            </td>
+            <td><input type = "text" class="form-control" name = "stuN" placeholder="학번"></td>
+            <td>
+                <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                학생회비
+                <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><input type = "radio" name = "feeOfSch" value="true">납부</li>
+                <li><input type = "radio" name = "feeOfSch" value="false">미납</li>
+                </ul>
+                </div>
+            </td>
+            <td><input type = "password" class="form-control" name = "password" placeholder="비밀번호"></td>
+            <td><input type = "password" class="form-control" name = "password_confirmation" placeholder="비밀번호 확인"></td>
+            <td>
+                <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                권한선택
+                <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><input type = "radio" name = "identity" value="1">학부생</li>
+                <li><input type = "radio" name = "identity" value="2">대학원생</li>
+                <li><input type = "radio" name = "identity" value="3">교수</li>
+                <li><input type = "radio" name = "identity" value="admin">관리자</li>
+                </ul>
+                </div>
+            </td>
+          </tbody>
+        </table>
+      </div>
+      <input class="btn btn-default" type="submit" value="완료" onclick="return confirm('입력하신 정보를 등록하시겠습니까?')">
+    <% end %>
+  </div>

@@ -1,0 +1,179 @@
+<!-- Intro Section -->
+<section id="intro" class="intro-section">
+    <div class="wall"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+               <img class="logo" src="assets/logo.gif">
+               <h1 id="locker">당신의 사물함을 인터넷으로 신청하세요</h1>
+                 <p class = "slp">귀찮게 왔다갔다 할 필요가 없습니다.</p>
+<br>
+<br>
+
+                                <% if user_signed_in?&&user_admin? %>
+                                <a class = "btn btn-default btn-lg" href="/admin" style="color: black;">이용하기</a>
+                                 <% else %>
+                               <a class = "btn btn-default btn-lg" href="/choose" style="color: black;">이용하기</a>
+                                 <% end%>
+                               <a class="btn btn-default btn-lg page-scroll" href="#services">이용방법</a>
+
+                                   <div class="wall"></div>
+
+                               <a href='https://play.google.com/store/apps/details?id=com.w_5557579'>
+                                 <img alt='다운로드하기 Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/ko_badge_web_generic.png'/ style="width:150px;">
+                               </a>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- About Section -->
+  <section id="about" class="about-section parallax parallax1">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12">
+                <h1><strong id = "why">굳이 불편하게 찾아가지 않아도 됩니다</strong></h1>
+                <h3 id="why_sub">온라인을 통한 사물함 신청 서비스<br>
+                  <strong>사물함신청자</strong>는 간단하게 신청하고<br>
+                  <strong>사물함신청담당자</strong>는 간단하게 접수받고<br>
+                  간단하게 <strong>유지보수</strong>까지!<br>
+                  무료입니다.
+                </h3>
+              </div>
+          </div>
+      </div>
+  </section>
+
+<!-- Services Section -->
+<section id="services" class="services-section">
+    <div class="container">
+          <div class="row">
+                <div class="col-lg-12">
+                <h1><strong id="ylml">네자리내자리? </strong></h1>
+                  <h4 id="ylml_sub">대학교, 공공시설, 기업 또한 무료로 사용할 수 있는 사물함관리 페이지입니다.<br>
+                  서버 및 장비설치 없이 접속하기만 하면 <br>
+                  사물함 신청, 관리가 간편해집니다.<br></h4>
+                </div>
+
+                <div class="col-xs-6" id="usemethod">
+                  <div class="list-group">
+                    <div class="list-group-item" style="text-align:center; background-color:#2c3e50; color:white;">
+                      사물함신청자 이용방법
+                    </div>
+                    </div>
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">로그인</h3>
+                      </div>
+                      <div class="panel-body">
+                        가입되어 있는 아이디로 로그인합니다.
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">사물함신청</h3>
+                  </div>
+                  <div class="panel-body">
+                    공지된 사물함 신청기간에 맞게 원하는 사물함을 신청합니다.
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">사물함신청 확인</h3>
+                  </div>
+                  <div class="panel-body">
+                    사물함이 제대로 신청되어있는지 확인합니다.
+                  </div>
+                </div>
+                </div>
+
+                <div class="col-xs-6" id="usemethod">
+                <div class="list-group">
+                  <div class="list-group-item" style="text-align:center; background-color:#2c3e50; color:white;">
+                    사물함신청담당자 이용방법
+                  </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">로그인</h3>
+                    </div>
+                    <div class="panel-body">
+                      관리자 아이디로 로그인합니다.
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">사물함설정</h3>
+                </div>
+                <div id="boxbox" class="panel-body">
+                신청받을 사물함에 대한 설정을 관리합니다.
+                </div>
+                </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">사물함신청 확인</h3>
+                </div>
+                <div class="panel-body">
+                설정된 사물함에 올바르게 신청되었는지 확인합니다.
+                </div>
+                </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">회원관리</h3>
+                </div>
+                <div class="panel-body">
+                기존의 회원명부를 통해 빠르고 쉽게 회원을 관리할 수 있습니다.
+                </div>
+                </div>
+
+                </div>
+
+              <div class="col-xs-12">
+                <br>
+                <br>
+                <% if user_signed_in?&&user_admin? %>
+                <a class="btn btn-default btn-lg btn-block" href="/admin" style="color: black;">지금바로 이용하기</a>
+                  <% else %>
+                  <a class="btn btn-default btn-lg btn-block" href="/choose" style="color: black;">지금바로 이용하기</a>
+                  <% end%>
+              </div>
+            </div>
+</div>
+</div>
+</section>
+<!-- color Section -->
+<section id="color1" class="color1-section">
+    <div class="container">
+        <div class="row">
+
+            </div>
+        </div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="contact-section parallax2">
+    <div class="container">
+
+    <div class="row">
+        <div class="col-lg-4 col-xs-12">
+             <!--경희대 로고
+             <img src="assets/khu.jpg" style="width:200px; float:left;">
+           -->
+       </div>
+
+      <div class="col-xs-12 col-lg-8">
+          <h1><strong id="service">서비스 학교 및 공공시설</strong></h1>
+
+          <h4>경희대학교 응용화학과</h4>
+          <h4>경희대학교 응용과학대학</h4>
+          <h4>경희대학교 산업경영공학과</h4>
+          <h4>경희대학교 전자정보대학</h4>
+      </div>
+      <div class="col-xs-12 col-lg-4">
+        <img class="icon" src="assets/icon.gif" align="left">
+      </div>
+
+    </div>
+
+</div>
+</section>

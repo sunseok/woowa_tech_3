@@ -1,0 +1,78 @@
+  <div class="container container-fluid">
+    <!-- Page Heading -->
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">
+              가입신청 확인<small>Subscription Status</small>
+          </h1>
+
+          <div class="container">
+            <div class="btn-group">
+              <button type="button" class="btn btn-default">양식 선택</button>
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="/tempusers/index" type="button" class="btn btn-default"> 기본 양식 </a></li>
+                <li><a href="/tempusers/indexE" type="button" class="btn btn-default"> 엑셀 양식 </a></li>
+                <li><a href="/tempusers/select" type="button" class="btn btn-default"> 개별 관리 </a></li>
+                <li><a href="https://docs.google.com/spreadsheets/u/0/" target="_blank" type="button" class="btn btn-default"> Google Sheets </a></li>
+              </ul>
+            </div>
+<div class="table-responsive">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th class="admin_index"><strong>&nbsp&nbsp&nbspname&nbsp&nbsp&nbsp</strong></th>
+        <th class="admin_index"><strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbspmajor&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</strong></th>
+        <th class="admin_index"><strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbspstuN&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</strong></th>
+        <th class="admin_index"><strong>&nbsp&nbsp&nbspidentity&nbsp&nbsp&nbsp</strong></th>
+        <th class="admin_index"><strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsppassword&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</strong></th>
+        <th class="admin_index"><strong>&nbspfeeOfSch&nbsp</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tempusers.each do |i| %>
+        <% if User.find_by(stuN: i.stuN).nil? %>
+          <tr>
+            <td>
+              <%= i.name %>
+            </td>
+            <td>
+              <%= i.major %>
+            </td>
+              <td>
+                <%= i.stuN %>
+              </td>
+            <td>
+              <% if i.identity == "1" %>
+                1
+              <% elsif i.identity == "2" %>
+                2
+              <% elsif i.identity == "3" %>
+                3
+              <% else %>
+                admin
+              <% end %>
+            </td>
+            <td>
+              <%= i.stuN %>
+            </td>
+            <td>
+              <% if i.feeOfSch == true %>
+                true
+              <% else %>
+                false
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
+</div>
+</div>

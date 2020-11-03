@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>네자리내자리</title>
+    <meta charset="utf-8">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application', "data-turbolinks-track" => true %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="theme-color" content="#2a2a2a" />
+    <meta name="author" content="ylml" />
+    <meta name="description" content="온라인 사물함 신청 서비스" />
+    <meta property="og:title" content="네자리내자리" />
+    <meta property="og:image" content="https://imgur.com/JS5sTca.png" />
+    <meta property="og:url" content="https://yl-ml.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="온라인 사물함 신청 서비스">
+    <link rel="shortcut icon" type="image/png" href="https://imgur.com/KAWelCC.png"/>
+    <!--Google Analytices-->
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105751489-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+      <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link href="application.css" rel="stylesheet">
+    <!-- font-->
+    <!--font awesome-->
+    <script src="https://use.fontawesome.com/c4d4806801.js"></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Scrolling Nav JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="application.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <% if current_page?(root_path)%>
+                    <a class="navbar-brand page-scroll" href="#page-top">
+                    <%= image_tag("basiclogo_B.png", id: "ylml_logo") %>
+                    </a>
+                    <% else %>
+                    <a class="navbar-brand page-scroll" href="/">
+                    <%= image_tag("basiclogo_B.png", id: "ylml_logo") %>
+                    </a>
+                    <% end %>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav navbar-right">
+              <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+              <% if current_page?(root_path)%>
+              <li class="hidden">
+                  <a class="page-scroll" href="#page-top"></a>
+              </li>
+              <li>
+                  <a class="page-scroll" href="#about">서비스</a>
+              </li>
+              <li>
+                  <a class="page-scroll" href="#services">이용방법</a>
+              </li>
+              <li>
+                  <a class="page-scroll" href="#contact">이용시설</a>
+              </li>
+              <% else %>
+              <li class="hidden">
+                  <a class="page-scroll" href="/posts#page-top"></a>
+              </li>
+              <li><%= link_to "서비스", root_path(@root, :anchor => "about") %></li>
+              <li><%= link_to "이용방법", root_path(@root, :anchor => "services") %></li>
+              <li><%= link_to "이용시설", root_path(@root, :anchor => "contact") %></li>
+              <% end %>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><b class="caret"></b></a>
+                <ul class="dropdown-menu alert-dropdown">
+                  <% if user_signed_in? %>
+                    <li>&nbsp&nbsp&nbsp&nbsp<strong><%= current_user.name %></strong>&nbsp님 안녕하세요.</li>
+                  <% end %>
+                  <% if user_signed_in? %>
+                    <% if user_admin? %>
+                    <hr/>
+                      <li><%= link_to "사물함설정", edit_limit_path(current_major?.to_i), method:"get" %></li>
+                      <li><%= link_to "신청현황", admin_index_path %></li>
+                      <li><%= link_to "학생등록", csv_index_path, method:"get" %></li>
+                      <li><%= link_to "가입신청 확인", tempusers_index_path, method:"get" %></li>
+                    <% else %>
+                      <li><%= link_to "사물함 신청", choose_index_path, method: "get" %></li>
+                    <% end %>
+                  <% else %>
+                    <li><a href="/users/sign_in">로그인</a></li>
+                    <li><a href="/tempusers/new">가입신청</a></li>
+                  <% end %>
+                  <% if user_signed_in? %>
+                  <hr>
+                    <li><%= link_to new_post_path do %>내 정보<% end %></li>
+                    <li><%= link_to "로그아웃", destroy_user_session_path, method: "delete" %></li>
+                  <% end %>
+                </ul>
+            </li>
+
+
+          </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+    </nav>
+    <div class = "wall"></div>
+    <% if flash[:success] %>
+  <div class="alert alert-success">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<% if flash[:warning] %>
+  <div class="alert alert-warning">
+    <%= flash[:warning] %>
+  </div>
+<% end %>
+<% if flash[:info] %>
+  <div class="alert alert-info">
+    <%= flash[:info] %>
+  </div>
+<% end %>
+
+<% if current_page?(root_path)%>
+    <%= yield %>
+    <% else %>
+<div class="contents">
+    <%= yield %>
+  </div>
+  <% end %>
+    <!-- footer Section -->
+  <% if current_page?(root_path)%>
+    <section class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-xs-12">
+                  <strong><P>Created by</p></strong><br>
+                  <strong>김도훈</strong> dhooonk@naver.com<br>
+                  <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                  <a href="https://www.facebook.com/doehoon.kim" style="color: #a9afb3;"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                  <i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+                  <a href="https://www.instagram.com/kimdoehoon/" style="color: #a9afb3;"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                  <br>
+                  <strong>서원석</strong> younha1000@daum.net<br>
+                  <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                  <a href="https://www.facebook.com/dydrlaks?fref=ts" style="color: #a9afb3;"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                  <i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+                  <a href="https://www.instagram.com/dydrlaks/" style="color: #a9afb3;"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+              </div>
+                <div class="col-lg-4 col-xs-12">
+                   Code licensed under <strong><a href="ttps://opensource.org/licenses/mit-license.html" style="color: #a9afb3;">MIT License</a></strong><br>
+                   Documentation licensed under <strong><a href="https://creativecommons.org/licenses/by/3.0/" style="color: #a9afb3;">CC BY 3.0</a></strong><br><br>
+                   <strong>Special thanks to</strong><br>
+                   <%= image_tag("basiclogo_E_H_W.png", id: "footer_id")%>
+                </div>
+                <div class="col-xs-12">
+                    <hr style="border-color:#fff;margin-bottom:1.6em;">
+                   <a href="/posts#services" style="color: #a9afb3;">소개</a> /
+                   <a href="/posts/partner" style="color: #a9afb3;">제휴제안</a> /
+                   <a href="/posts/privacy" style="color: #a9afb3;">개인정보처리방침</a>
+                </div>
+            </div>
+          </div>
+    </section>
+  <% else %>
+  <div class= "footer">
+  <section class="footer-section">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-8 col-xs-12">
+                  <strong><P>Created by</p></strong><br>
+                  <strong>김도훈</strong> dhooonk@naver.com<br>
+                  <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                  <a href="https://www.facebook.com/doehoon.kim" style="color: #a9afb3;"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                  <i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+                  <a href="https://www.instagram.com/kimdoehoon/" style="color: #a9afb3;"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                  <br>
+                  <strong>서원석</strong> younha1000@daum.net<br>
+                  <i class="fa fa-home fa-2x" aria-hidden="true"></i>
+                  <a href="https://www.facebook.com/dydrlaks?fref=ts" style="color: #a9afb3;"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                  <i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+                  <a href="https://www.instagram.com/dydrlaks/" style="color: #a9afb3;"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+              </div>
+              <div class="col-lg-4 col-xs-12">
+                 Code licensed under <strong><a href="ttps://opensource.org/licenses/mit-license.html" style="color: #a9afb3;">MIT License</a></strong><br>
+                 Documentation licensed under <strong><a href="https://creativecommons.org/licenses/by/3.0/" style="color: #a9afb3;">CC BY 3.0</a></strong><br><br>
+                 <strong>Special thanks to</strong><br>
+                 <%= image_tag("basiclogo_E_H_W.png", id: "footer_id")%>
+              </div>
+              <div class="col-xs-12">
+                  <hr style="border-color:#fff;margin-bottom:1.6em;">
+                 <a href="/posts#services" style="color: #a9afb3;">소개</a> /
+                 <a href="/posts/partner" style="color: #a9afb3;">제휴제안</a> /
+                 <a href="/posts/privacy" style="color: #a9afb3;">개인정보처리방침</a>
+              </div>
+          </div>
+        </div>
+  </section>
+</div>
+  <% end %>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+  <div class="container container-fluid">
+  <!-- Page Heading -->
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">
+            내 정보<small>My info</small>
+        </h1>
+        <div class="table-responsive">
+          <table class="table">
+            <tr>
+              <th class = "new_html"><strong>권한</strong></th>
+              <th class = "new_html"><strong>이름</strong></th>
+              <th class = "new_html"><strong>학과</strong></th>
+              <th class = "new_html"><strong>학번</strong></th>
+              <th class = "new_html"><strong>비밀번호</strong></th>
+              <th class = "new_html"><strong>학과사물함</strong></th>
+              <th class = "new_html"><strong>단과대학사물함</strong></th>
+              <th class = "new_html"><strong>납부여부</strong></th>
+            </tr>
+            <tr class = "new_html">
+                <% if current_user.identity == "1" %>
+                   <th class = "new_html">학부생</th>
+                <% elsif current_user.identity == "2" %>
+                   <th class = "new_html">대학원생</th>
+                <% elsif current_user.identity == "3" %>
+                   <th class = "new_html">교수</th>
+                <% elsif current_user.identity == "admin" %>
+                   <th class = "new_html">관리자 </th>
+                <% end %>
+              <th class = "new_html"><%= current_user.name %></th>
+              <th class = "new_html"><%= current_user.major %></th>
+              <th class = "new_html"><%= current_user.stuN %></th>
+              <th class = "new_html"><%= link_to "회원정보수정", edit_user_registration_path %></th>
+              <% if current_user.identity != "admin" %>
+                <% if current_user.major == "응용화학과" %>
+                  <% if (current_user.cabinet != nil) && (current_user.cabinetApliSci != nil) %>
+                    <th class = "new_html"><%= current_user.cabinet.cabin %>&nbsp<%= link_to "취소", "/box/destroy_apli_chem/#{current_user.id}", method:"delete", data: {confirm: "정말 취소하시겠습니까?"} %></th>
+                    <th class = "new_html"><%= current_user.cabinetApliSci.cabins_aplsci %>&nbsp<%= link_to "취소", "/box/destroy_apli_sci/#{current_user.id}", method:"delete", data: {confirm: "정말 취소하시겠습니까?"} %></th>
+                  <% elsif (current_user.cabinet == nil) && (current_user.cabinetApliSci == nil) %>
+                    <th class = "new_html"><%= link_to "신청하기", box_index_path, method: "get" %></th>
+                    <th class = "new_html"><%= link_to "신청하기", box_applsci_path, method: "get" %></th>
+                  <% elsif (current_user.cabinet != nil) && (current_user.cabinetApliSci == nil) %>
+                    <th class = "new_html"><%= current_user.cabinet.cabin %>&nbsp<%= link_to "취소", "/box/destroy_apli_chem/#{current_user.id}", method:"delete", data: {confirm: "정말 취소하시겠습니까?"} %></th>
+                    <th class = "new_html"><%= link_to "신청하기", box_applsci_path, method: "get" %></th>
+                  <% elsif (current_user.cabinet == nil) && (current_user.cabinetApliSci != nil) %>
+                    <th class = "new_html"><%= link_to "신청하기", box_index_path, method: "get" %></th>
+                    <th class = "new_html"><%= current_user.cabinetApliSci.cabins_aplsci %>&nbsp<%= link_to "취소", "/box/destroy_apli_sci/#{current_user.id}", method:"delete", data: {confirm: "정말 취소하시겠습니까?"} %></th>
+                  <% end %>
+                <% elsif (current_user.major == "응용물리학과" || current_user.major == "응용수학과" || current_user.major == "우주과학과") %>
+                  <% if  (current_user.cabinetApliSci != nil) %>
+                    <th class = "new_html">신청불가</th>
+                    <th class = "new_html"><%= current_user.cabinetApliSci.cabins_aplsci %>&nbsp<%= link_to "취소", "/box/destroy_apli_sci/#{current_user.id}", method:"delete", data: {confirm: "정말 취소하시겠습니까?"} %></th>
+                  <% else %>
+                    <th class = "new_html">신청불가</th>
+                    <th class = "new_html"><%= link_to "신청하기", box_applsci_path, method: "get" %></th>
+                  <% end %>
+                <% elsif current_user.major == "산업경영공학과" %>
+                  <% if current_user.cabinetIme != nil %>
+                    <th class = "new_html"><%= current_user.cabinetIme.cabins_ime %>&nbsp<%= link_to "취소", "/box/destroy_ime/#{current_user.id}", method:"delete", data: {confirm: "정말 취소하시겠습니까?"} %></th>
+                    <th class = "new_html">신청불가</th>
+                  <% else %>
+                    <th class = "new_html"><%= link_to "신청하기", box_ime_path, method: "get" %></th>
+                    <th class = "new_html">신청불가</th>
+                  <% end %>
+                <% else %>
+                  <% if current_user.cabinetEni != nil %>
+                    <th class = "new_html">신청불가</th>
+                    <th class = "new_html"><%= current_user.cabinetEni.cabins_eni %>&nbsp<%= link_to "취소", "/box/destroy_eni/#{current_user.id}", method:"delete", data: {confirm: "정말 취소하시겠습니까?"} %></th>
+                  <% else %>
+                    <th class = "new_html">신청불가</th>
+                    <th class = "new_html"><%= link_to "신청하기", box_eni_path, method: "get" %></th>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <th class = "new_html">관리자 신청불가</th>
+                <th class = "new_html">관리자 신청불가</th>
+              <% end %>
+              <th class = "new_html">
+                <% if current_user.feeOfSch == true%>
+                  납부
+                <% else %>
+                  미납
+                <% end %>
+              </th>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
