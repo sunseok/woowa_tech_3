@@ -1,0 +1,54 @@
+<div class="w-75 p-3" style="background-color: #eee;">
+        <h2>
+            <div class ="dropdown123">
+                <h2>유저 리스트</h2>
+                <div class="dropdown">
+                    <a href="/users/analizePerBookUsers">
+                        <button type="button" class="btn btn-secondary">
+                            도서별 독자수
+                        </button>
+                    </a>
+                    <a href = "/users/analizePerGenreUsers">
+                        <button type="button" class="btn btn-secondary">
+                            장르별 읽힌 권수
+                        </button>
+                    </a>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        정렬기준
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/users/index/<%= 'menteeNum' %>">멘티</a>
+                        <a class="dropdown-item" href="/users/index/<%= 'readVol' %>">독서량</a>
+                        <a class="dropdown-item" href="/users/index/<%= 'favGenre' %>">장르</a>
+                    </div>
+                </div>
+            </div>
+        </h2>    
+    <table class="table">
+        <th>이메일</th>
+        <th>이름</th>
+        <th>가입일</th>
+        <th>독서량</th>
+        <th>좋아하는 장르</th>
+        <th>멘티 수</th>
+        <th>멘토신청</th>
+        <% @users.each do |user| %>
+            <tr>
+                <td><%= user.email %></td>
+                <td><%= user.name %></td>
+                <td><%= user.created_at.to_date %></td>
+                <td><%= user.readVol %></td>
+                <td><%= user.favGenre %>(<%= user.favGenreVol %>권)</td>
+                <td><%= user.menteeNum %></td>
+                <td>
+                    <a href="/users/create/<%= user.id%>">
+                        <svg class="bi bi-person-plus-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                            <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
+                        </svg>
+                    </a>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</div>
